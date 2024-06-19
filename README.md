@@ -29,15 +29,15 @@ To hash a password, simply call the `Hash` function with the password string:
 package main
 
 import (
-	"fmt"
+    "fmt"
 
-	"github.com/bionicosmos/argon2"
+    "github.com/bionicosmos/argon2"
 )
 
 func main() {
-	password := "B^G3cMzs0$14cH2201&&"
-	hashedPassword := argon2.Hash(password)
-	fmt.Println("Hashed Password:", hashedPassword)
+    password := "B^G3cMzs0$14cH2201&&"
+    hashedPassword := argon2.Hash(password)
+    fmt.Println("Hashed Password:", hashedPassword)
     // Hashed Password: $argon2id$v=19$m=65536,t=1,p=8$EUfYfS8YbMh9bgBLTZE3Aw$l5XAX/80bljGYBvaHp3C1dt/x5pG5iG2clZahCun7hY
 }
 ```
@@ -50,17 +50,17 @@ To verify a password against a hashed password, use the `Verify` function:
 package main
 
 import (
-	"fmt"
+    "fmt"
 
-	"github.com/bionicosmos/argon2"
+    "github.com/bionicosmos/argon2"
 )
 
 func main() {
-	password := "B^G3cMzs0$14cH2201&&"
-	hashedPassword := "$argon2id$v=19$m=65536,t=1,p=8$EUfYfS8YbMh9bgBLTZE3Aw$l5XAX/80bljGYBvaHp3C1dt/x5pG5iG2clZahCun7hY"
+    password := "B^G3cMzs0$14cH2201&&"
+    hashedPassword := "$argon2id$v=19$m=65536,t=1,p=8$EUfYfS8YbMh9bgBLTZE3Aw$l5XAX/80bljGYBvaHp3C1dt/x5pG5iG2clZahCun7hY"
 
-	isValid := argon2.Verify(password, hashedPassword)
-	fmt.Println("Password is valid:", isValid)
+    isValid := argon2.Verify(password, hashedPassword)
+    fmt.Println("Password is valid:", isValid)
     // Password is valid: true
 }
 ```
