@@ -13,6 +13,9 @@ import (
 	"golang.org/x/crypto/argon2"
 )
 
+// Hash returns the hash string from the given password. The function
+// automatically generates a random salt and uses predefined parameters for the
+// Argon2id algorithm.
 func Hash(password string) string {
 	salt, err := generateRandomSalt(16)
 	if err != nil {
@@ -38,6 +41,8 @@ func Hash(password string) string {
 	)
 }
 
+// Verify returns `true` if the password matches the hash, and `false`
+// otherwise.
 func Verify(password string, hash string) bool {
 	key, p, err := Parse(hash)
 	if err != nil {
@@ -62,8 +67,14 @@ type Param struct {
 	KeyLen  uint32
 }
 
-var ErrInvalidEncodedHash = errors.New("invalid encoded hash")
-var ErrVersionMismatch = errors.New("version mismatch")
+var (
+	// ErrInvalidEncodedHash indicates that the encoded hash is invalid.
+	ErrInvalidEncodedHash = errors.New("invalid encoded hash")
+
+	// ErrVersionMismatch indicates that there is a version mismatch between the
+	// hash and the current Argon2 version.
+	ErrVersionMismatch = errors.New("version mismatch")
+)
 
 func Stringify(key []byte, p *Param) string {
 	return fmt.Sprintf(
